@@ -15,13 +15,13 @@ const int LIMIAR = 700;
 
 // Velocidades de referência
 const int VEL_PARADO = 90;
-const int VEL_MAX_FRENTE_ESQ = 135; 
+const int VEL_MAX_FRENTE_ESQ = 140; 
 const int VEL_MAX_FRENTE_DIR = 45;  
 
 void setup() {
   // Configuração das portas dos motores
-  motor_esquerda.attach(7);
-  motor_direita.attach(10);
+  motor_esquerda.attach(8);
+  motor_direita.attach(9);
 
   // Configuração dos pinos dos sensores como entrada
   pinMode(S1, INPUT);
@@ -48,8 +48,8 @@ void loop() {
   
   if (s3 < LIMIAR) {
     // Linha no centro: vai para frente em linha reta
-    motor_esquerda.write(130);
-    motor_direita.write(50);
+    motor_esquerda.write(135);
+    motor_direita.write(48);
   } 
   else if (s2 < LIMIAR || s1 < LIMIAR) {
     // Linha indo para a esquerda: corrige virando para a esquerda
@@ -58,12 +58,12 @@ void loop() {
   } 
   else if (s4 < LIMIAR || s5 < LIMIAR) {
     // Linha indo para a direita: corrige virando para a direita
-    motor_esquerda.write(135);  // Esquerdo empurra para a frente
+    motor_esquerda.write(143);  // Esquerdo empurra para a frente
     motor_direita.write(90);    // Direito desacelera/para
   } 
   else {
     // Se perder a linha momentaneamente, avança devagar procurando
-    motor_esquerda.write(110);
+    motor_esquerda.write(113);
     motor_direita.write(70);
   }
 }
