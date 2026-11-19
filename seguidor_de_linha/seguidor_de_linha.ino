@@ -44,26 +44,26 @@ void loop() {
   int s4 = analogRead(S4);
   int s5 = analogRead(S5);
 
-  // Lógica de seguimento corrigida para o sentido correto das curvas:
-  
+  // Lógica de seguimento:
   if (s3 < LIMIAR) {
-    // Linha no centro: vai para frente em linha reta
+    // Linha no centro: vai para frente em linha reta (mantido conforme seu ajuste)
     motor_esquerda.write(135);
     motor_direita.write(48);
   } 
   else if (s2 < LIMIAR || s1 < LIMIAR) {
     // Linha indo para a esquerda: corrige virando para a esquerda
-    motor_esquerda.write(90);   // Esquerdo desacelera/para
+    motor_esquerda.write(90);   // Esquerdo para
     motor_direita.write(45);    // Direito empurra para a frente
   } 
   else if (s4 < LIMIAR || s5 < LIMIAR) {
     // Linha indo para a direita: corrige virando para a direita
     motor_esquerda.write(143);  // Esquerdo empurra para a frente
-    motor_direita.write(90);    // Direito desacelera/para
+    motor_direita.write(90);    // Direito para
   } 
   else {
-    // Se perder a linha momentaneamente, avança devagar procurando
-    motor_esquerda.write(113);
-    motor_direita.write(70);
+    // Velocidade média (ex.: ao perder a linha momentaneamente):
+    // Compensação extra no motor esquerdo por ser mais lento
+    motor_esquerda.write(116);
+    motor_direita.write(69);
   }
 }
